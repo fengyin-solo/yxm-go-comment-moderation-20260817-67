@@ -37,9 +37,6 @@ func (s *MemoryStore) UpdateReport(r *model.Report) error {
 	if _, ok := s.reports[r.ID]; !ok {
 		return ErrNotFound
 	}
-	if r.Status == model.ReportDismissed {
-		r.HandledBy = ""
-	}
 	s.reports[r.ID] = r
 	return nil
 }

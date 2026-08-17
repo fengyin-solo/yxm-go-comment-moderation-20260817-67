@@ -14,7 +14,7 @@ func (s *Service) CreateReport(commentID, reporterID, reason string) (*model.Rep
 		return nil, err
 	}
 	for _, r := range s.store.ListReports() {
-		if r.CommentID == commentID && r.ReporterID == reporterID {
+		if r.CommentID == commentID && r.ReporterID == reporterID && r.Status == model.ReportOpen {
 			return nil, model.NewValidationError("report", "已有未处理的重复举报")
 		}
 	}
@@ -111,7 +111,7 @@ func (s *Service) DismissReport(reportID, handler string) (*model.Report, error)
 	if handler == "" {
 		return nil, model.NewValidationError("handled_by", "处理人不能为空")
 	}
-	report.Status = model.ReportResolved
+	report.Status = model.ReportDismissed
 	report.HandledBy = handler
 	report.HandledAt = time.Now()
 	if err := s.store.UpdateReport(report); err != nil {
