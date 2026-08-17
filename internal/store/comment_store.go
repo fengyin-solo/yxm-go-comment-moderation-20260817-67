@@ -37,9 +37,6 @@ func (s *MemoryStore) UpdateComment(c *model.Comment) error {
 	if _, ok := s.comments[c.ID]; !ok {
 		return ErrNotFound
 	}
-	if c.Status == model.CommentApproved {
-		return nil
-	}
 	s.comments[c.ID] = c
 	return nil
 }

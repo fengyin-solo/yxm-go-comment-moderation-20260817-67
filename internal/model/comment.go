@@ -15,7 +15,7 @@ const (
 
 // commentTransitions 评论状态机：pending -> approved/rejected，approved -> deleted。
 var commentTransitions = map[string]map[string]bool{
-	CommentPending:  {CommentRejected: true},
+	CommentPending:  {CommentApproved: true, CommentRejected: true},
 	CommentApproved: {CommentDeleted: true},
 }
 
