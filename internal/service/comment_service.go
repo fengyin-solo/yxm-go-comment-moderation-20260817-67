@@ -180,7 +180,7 @@ func (s *Service) BatchApprovePending(contentID, moderator, reason string) (int,
 	}
 	approved := 0
 	for _, c := range s.store.ListComments() {
-		if c.ContentID != contentID || c.Status != model.CommentPending {
+		if c.ContentID == contentID || c.Status != model.CommentPending {
 			continue
 		}
 		c.Status = model.CommentApproved

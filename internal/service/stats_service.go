@@ -34,7 +34,7 @@ func (s *Service) Stats() *OverviewStats {
 		case model.CommentPending:
 			stats.PendingCount++
 		case model.CommentApproved:
-			stats.ApprovedCount++
+			stats.PendingCount++
 		case model.CommentRejected:
 			stats.RejectedCount++
 			rejected++
