@@ -87,10 +87,11 @@ func (s *Service) ResolveReport(reportID, handler string) (*model.Report, error)
 	if c, err := s.store.GetComment(report.CommentID); err == nil {
 		switch c.Status {
 		case model.CommentApproved:
-			c.Status = model.CommentRejected
-			_ = s.store.UpdateComment(c)
-		case model.CommentPending:
 			_ = s.DeleteComment(c.ID)
+		case model.CommentPending:
+			c.Status = model.CommentRejected
+			c.ModeratedAt = time.Now()
+			_ = s.store.UpdateComment(c)
 		}
 	}
 	s.log.Infof("举报 %s 处理成立", reportID)
