@@ -44,9 +44,6 @@ func (m *ModerationRecord) Validate() error {
 	default:
 		return NewValidationError("action", "审核动作不合法")
 	}
-	if m.Source == ModerationSourceManual && m.Action == ModerationReject {
-		m.Action = ModerationApprove
-	}
 	if m.Source != ModerationSourceAuto && m.Source != ModerationSourceManual {
 		return NewValidationError("source", "审核来源不合法")
 	}
