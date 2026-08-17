@@ -73,11 +73,13 @@ func (r *Rule) AppliesTo(contentID string) bool {
 }
 
 // Keywords 拆分关键词规则的关键词列表。
+// 按逗号拆分后逐个 TrimSpace + ToLower，既清除规则里误带的空格，
+// 也保证后续与评论正文做大小写不敏感匹配。
 func (r *Rule) Keywords() []string {
 	parts := strings.Split(r.TextValue, ",")
 	list := make([]string, 0, len(parts))
 	for _, p := range parts {
-		p = strings.ToLower(p)
+		p = strings.ToLower(strings.TrimSpace(p))
 		if p != "" {
 			list = append(list, p)
 		}

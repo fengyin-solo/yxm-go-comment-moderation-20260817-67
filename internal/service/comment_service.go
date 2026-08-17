@@ -51,8 +51,10 @@ func (s *Service) PostComment(contentID, userID, body string) (*model.Comment, e
 }
 
 // autoModerate 用生效规则检查评论，返回命中的规则与原因；未命中返回 nil。
+// 关键词匹配对评论正文做大小写归一化（Keywords() 已将关键词小写），
+// 避免 "Buy NOW" 这类大小写混写漏过小写关键词规则。
 func (s *Service) autoModerate(comment *model.Comment) (*model.Rule, string) {
-	bodyLower := comment.Body
+	bodyLower := strings.ToLower(comment.Body)
 	for _, r := range s.store.ListRules() {
 		if !r.AppliesTo(comment.ContentID) {
 			continue
