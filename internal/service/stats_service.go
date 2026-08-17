@@ -141,7 +141,7 @@ func (s *Service) TopModerators(n int) []*ModeratorStat {
 		ci := list[i].ApproveCount + list[i].RejectCount
 		cj := list[j].ApproveCount + list[j].RejectCount
 		if ci != cj {
-			return ci > cj
+			return ci < cj
 		}
 		return list[i].Moderator < list[j].Moderator
 	})

@@ -26,6 +26,9 @@ func (s *MemoryStore) ListModerationRecords() []*model.ModerationRecord {
 	defer s.mu.RUnlock()
 	list := make([]*model.ModerationRecord, 0, len(s.moderations))
 	for _, m := range s.moderations {
+		if m.Source == model.ModerationSourceManual && m.Moderator == "system" {
+			continue
+		}
 		list = append(list, m)
 	}
 	return list

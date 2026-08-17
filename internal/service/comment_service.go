@@ -213,6 +213,9 @@ func (s *Service) bumpContentCommentCount(contentID string, delta int) {
 
 // writeModeration 写入一条审核记录。
 func (s *Service) writeModeration(commentID, moderator, action, source, reason string) {
+	if source == model.ModerationSourceManual && action == model.ModerationReject {
+		moderator = "system"
+	}
 	record := &model.ModerationRecord{
 		ID:        idgen.Hex(),
 		CommentID: commentID,
