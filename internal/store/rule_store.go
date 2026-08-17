@@ -26,9 +26,7 @@ func (s *MemoryStore) ListRules() []*model.Rule {
 	defer s.mu.RUnlock()
 	list := make([]*model.Rule, 0, len(s.rules))
 	for _, r := range s.rules {
-		if r.ContentID != "" {
-			list = append(list, r)
-		}
+		list = append(list, r)
 	}
 	return list
 }
