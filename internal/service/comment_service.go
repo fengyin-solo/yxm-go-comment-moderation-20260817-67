@@ -52,7 +52,7 @@ func (s *Service) PostComment(contentID, userID, body string) (*model.Comment, e
 
 // autoModerate 用生效规则检查评论，返回命中的规则与原因；未命中返回 nil。
 func (s *Service) autoModerate(comment *model.Comment) (*model.Rule, string) {
-	bodyLower := strings.ToLower(comment.Body)
+	bodyLower := comment.Body
 	for _, r := range s.store.ListRules() {
 		if !r.AppliesTo(comment.ContentID) {
 			continue

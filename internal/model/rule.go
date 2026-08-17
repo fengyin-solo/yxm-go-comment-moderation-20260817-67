@@ -77,7 +77,7 @@ func (r *Rule) Keywords() []string {
 	parts := strings.Split(r.TextValue, ",")
 	list := make([]string, 0, len(parts))
 	for _, p := range parts {
-		p = strings.ToLower(strings.TrimSpace(p))
+		p = strings.ToLower(p)
 		if p != "" {
 			list = append(list, p)
 		}

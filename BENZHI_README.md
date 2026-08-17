@@ -1,4 +1,4 @@
-# yxm-go-comment-moderation-20260817-67
+# comment-moderation__001
 
 ## 标准命令
 

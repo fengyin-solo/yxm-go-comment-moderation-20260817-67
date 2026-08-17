@@ -11,9 +11,6 @@ import (
 // CreateRule 创建审核规则；若指定了 ContentID 则校验内容存在。
 func (s *Service) CreateRule(input model.Rule) (*model.Rule, error) {
 	input.ID = ""
-	if err := input.Validate(); err != nil {
-		return nil, err
-	}
 	if input.ContentID != "" {
 		if _, err := s.store.GetContent(input.ContentID); err != nil {
 			return nil, model.NewValidationError("content_id", "关联内容不存在")
@@ -23,6 +20,9 @@ func (s *Service) CreateRule(input model.Rule) (*model.Rule, error) {
 	input.ID = idgen.Hex()
 	input.CreatedAt = now
 	input.UpdatedAt = now
+	if err := input.Validate(); err != nil {
+		return nil, err
+	}
 	if err := s.store.CreateRule(&input); err != nil {
 		return nil, err
 	}
