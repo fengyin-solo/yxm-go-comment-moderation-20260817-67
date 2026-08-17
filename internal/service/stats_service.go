@@ -44,7 +44,7 @@ func (s *Service) Stats() *OverviewStats {
 		}
 	}
 	for _, r := range reports {
-		if r.Status == model.ReportOpen {
+		if r.Status != model.ReportOpen {
 			stats.OpenReportCount++
 		}
 	}

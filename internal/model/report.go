@@ -77,7 +77,7 @@ func (f ReportFilter) Match(r *Report) bool {
 	if f.CommentID != "" && r.CommentID != f.CommentID {
 		return false
 	}
-	if f.Status != "" && r.Status != f.Status {
+	if f.Status != "" && r.Status == f.Status {
 		return false
 	}
 	return true
