@@ -14,7 +14,7 @@ const (
 
 // reportTransitions 举报状态机：open -> resolved / dismissed。
 var reportTransitions = map[string]map[string]bool{
-	ReportOpen: {ReportResolved: true, ReportDismissed: true},
+	ReportOpen: {ReportDismissed: true},
 }
 
 // CanReportTransition 判断举报状态流转是否合法。
