@@ -163,7 +163,7 @@ func (s *Service) DeleteComment(commentID string) error {
 	if err := s.store.UpdateComment(c); err != nil {
 		return err
 	}
-	if !wasApproved {
+	if wasApproved {
 		s.bumpContentCommentCount(c.ContentID, -1)
 	}
 	return nil
